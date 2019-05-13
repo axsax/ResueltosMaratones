@@ -3,41 +3,63 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package problem10361;
+package problem355;
 
 import java.util.Scanner;
 
 /**
  *
- * @author axsax
+ * @author jhon-
  */
 public class Main {
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-        int casos = 0;
-        String inicio="",finaal="",s1="",s2="",s3="",s4="",s5="";
+        char[][] cadena = new char[14][25];
         Scanner sc = new Scanner(System.in);
-        casos = sc.nextInt();
-        sc.nextLine();
-        for (int i = 0; i < casos; i++) {
-            
-            inicio=sc.nextLine();
-            finaal=sc.nextLine();
-            if (inicio.startsWith("<")==true) {
-                s1="";
-            }else{
-                s1=inicio.substring(0,inicio.indexOf("<"));
+        int con = 0, full = 0, res = 0;
+
+        int primer = sc.nextInt();
+        String cada = "";
+        char o;
+        while (primer != 0) {
+            sc.nextLine();
+
+            for (int i = 0; i < primer; i++) {
+
+                cada = sc.nextLine();
+                for (int j = 0; j < cada.length(); j++) {
+
+                    cadena[i][j] = cada.charAt(j);
+
+                }
+
             }
-            
-            s2=inicio.substring(inicio.indexOf("<")+1, inicio.indexOf(">"));
-            inicio=inicio.substring(inicio.indexOf(">")+1,inicio.length());
-            s3=inicio.substring(0,inicio.indexOf("<"));
-            s4=inicio.substring(inicio.indexOf("<")+1,inicio.indexOf(">"));
-            s5= inicio.substring(inicio.indexOf(">")+1,inicio.length());
-            System.out.println(s1+s2+s3+s4+s5);
-            finaal=finaal.substring(0,finaal.indexOf("..."));
-            System.out.println(finaal+s4+s3+s2+s5);
-            s1="";s2="";s3="";s4="";s5="";
+
+            for (int i = 0; i < primer; i++) {
+                for (int j = 0; j < cada.length(); j++) {
+                    if (cadena[i][j] == 'X') {
+                        con++;
+                    }else if(cadena[i][j]==' '){
+                        break;
+                    }
+
+                }
+                if (i == 0) {
+                    full=con;
+     
+                }
+           res = res + Math.abs(full - con);
+                con=0;
+            }
+
+            System.out.println(res);
+            res = 0;
+            full = 0;
+            primer = sc.nextInt();
         }
+
     }
 }
